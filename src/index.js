@@ -43,6 +43,7 @@ app.post('/commands', (req, res) => {
         elements: [
           {
             label: 'Fellow @handle',
+            text: 'Fellow @handle',
             type: 'text',
             name: 'fellow',
             value: text,
@@ -50,33 +51,41 @@ app.post('/commands', (req, res) => {
           },
           {
             label: 'From what country?',
-            type: 'text',
+            type: 'select',
             name: 'country',
             value: text,
-            hint: 'Nigeria? Kenya? Uganda?',
+         options: [
+             { label: 'Kenya', value: 'Kenya' },
+             { label: 'Nigeria', value: 'Nigeria' },
+             { label: 'Uganda', value: 'Uganda' },
+             { label: 'Ghana', value: 'Ghana' },
+             { label: 'Other', value: 'Other' },
+           ],
           },
           {
             label: 'Travel Dates',
             type: 'text',
             name: 'dates',
             value: text,
-            hint: 'Dont forget the @',
+            hint: 'MM/DD/YYY - MM/DD/YYYY',
           }, 
           {
             label: 'Partner',
             type: 'text',
             name: 'partner',
             value: text,
-            hint: 'Dont forget the @',
+            hint: 'Salesforce Aacount name',
           }, 
            {
             label: 'Budget',
-            type: 'text',
+            type: 'select',
             name: 'budget',
             value: text,
-            hint: 'Dont forget the @',
+            options: [
+             { label: 'Andela covers 2 weeks ', value: 'Andela covers 2 weeks' },
+             { label: 'Partner', value: 'Partner' },
+              ],
           }, 
-          
           
         ],
       }),
