@@ -56,12 +56,28 @@ app.post('/commands', (req, res) => {
             hint: 'Nigeria? Kenya? Uganda?',
           },
           {
-            label: 'PXL Handle',
+            label: 'Travel Dates',
             type: 'text',
-            name: 'pxl',
+            name: 'dates',
             value: text,
             hint: 'Dont forget the @',
-          },          
+          }, 
+          {
+            label: 'Partner',
+            type: 'text',
+            name: 'partner',
+            value: text,
+            hint: 'Dont forget the @',
+          }, 
+           {
+            label: 'Budget',
+            type: 'text',
+            name: 'budget',
+            value: text,
+            hint: 'Dont forget the @',
+          }, 
+          
+          
         ],
       }),
     };

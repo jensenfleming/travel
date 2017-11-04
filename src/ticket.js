@@ -11,7 +11,9 @@ const sendConfirmation = (ticket) => {
     axios.post('https://hooks.zapier.com/hooks/catch/404051/ier6et/', qs.stringify({
       'Fellow': ticket.fellow,
       'Country': ticket.country,
-      'PXL': ticket.pxl,
+      'Dates': ticket.dates,
+      'Partner': ticket.partner,
+      'Budget': ticket.budget,
       'Date': Date.now(),
   })).then((result) => {
     debug('sendConfirmation: %o', result.data);
@@ -40,12 +42,20 @@ const sendConfirmation = (ticket) => {
             value: ticket.country,
           },
           {
-            title: 'Pxl',
-            value: ticket.pxl,
+            title: 'Dates',
+            value: ticket.dates,
           },
           {
             title: 'Date Submitted',
             value: Date.now(),
+          },
+          {
+            title: 'Partner',
+            value: ticket.partner,
+          },
+          {
+            title: 'Budget',
+            value: ticket.budget,
           },
         ],
       },
@@ -75,7 +85,9 @@ const create = (userId, submission) => {
     ticket.userEmail = result;
     ticket.fellow = submission.fellow;
     ticket.country = submission.country;
-    ticket.pxl = submission.pxl;
+    ticket.dates = submission.dates;
+    ticket.partner = submission.partner;
+    ticket.budget = submission.budget;
     ticket.date = submission.date;
     sendConfirmation(ticket);
 
