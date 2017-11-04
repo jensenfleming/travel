@@ -109,43 +109,36 @@ const sendConfirmation = (ticket) => {
     text: 'Fellow added!',
     attachments: JSON.stringify([
       {
-        title: `Fellow has been added by ${ticket.userEmail}`,
+        title: `${ticket.fellow} has been added by ${ticket.userEmail}`,
         // Get this from the 3rd party helpdesk system
-        title_link: 'http://example.com',
+        title_link: 'https://docs.google.com/spreadsheets/d/1QGGx7DmNsnhx8X1SV4tKvvPReLRA6emtvJXb5khGVs8/edit#gid=955276887',
         text: ticket.text,
         fields: [
           {
-            title: 'Fellow Handle',
-            value: ticket.fellow,
-          },
-          {
-            title: 'Country',
-            value: ticket.country,
-          },
-          {
-            title: 'PXL',
-            value: ticket.pxl,
-          },
-          {
-            title: 'Partner',
-            value: ticket.partner,
-          },
-          {
-            title: 'Partner Address',
-            value: ticket.address,
-          },
-          {
-            title: 'Partner Email',
-            value: ticket.email,
-          },
-          {
-            title: 'Travel Dates',
-            value: ticket.dates,
-          },
-          {
-            title: 'Date Submitted',
-            value: Date.now(),
-          },
+          title: 'Fellow Traveling:',
+          value: ticket.fellow,
+          'short': true
+        },
+        {
+          title: 'Partner:',
+          value: ticket.partner,
+          'short': true
+        },
+        {
+          title: 'Travel Center',
+          value: ticket.country,
+          'short': true
+        },
+        {
+          title: 'Target Travel Dates',
+          value: ticket.dates,
+          'short': true
+        },
+        {
+          title: 'Budget is coming from:',
+          value: ticket.budget,
+          'short': true
+        },
         ],
       },
     ]),
