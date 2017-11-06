@@ -30,39 +30,33 @@ const sendConfirmation = (ticket) => {
     text: 'Hi! I\'m TravelBot--here to help you get your visa for traveling :smile:.',
     attachments: JSON.stringify([
       {
-        title: 'Before we get started, do you already have a visa?',
-        // Get this from the 3rd party helpdesk system
-        // title_link: 'http://example.com',
-        text: ticket.text,
-        
+      text: ticket.text,
+      
         fallback: 'Pre-filled because you have actions in your attachment.',
-        color: '#30C3DD',
-        callback_id: 'decision',
+        callback_id: 'visa_holder',
         attachment_type: 'default',
-      actions: [
-        {
-          name: 'Yes! I have one',
-          text: 'Yes! I have one',
-          type: 'button',
-          style: 'primary',
-          value: 'Yes! I have one',
-          confirm: {
-            title: 'Active visa?',
-            text: 'Please confirm you have an active visa for the country you are traveling to!',
-            ok_text: 'Yes! My visa is active.',
-            dismiss_text: 'Oops, I don\'t have a visa. '
+        title: 'Before we get started, do you already have a visa? ',
+        actions: [
+          {
+            name: 'Yes! I have one',
+            text: 'Yes! I have one',
+            type: 'button',
+            style: 'primary',
+            value: 'yes'
+          },
+          {
+            name: 'No, I don\'t have a visa yet. ',
+            text: 'No, I don\'t have a visa yet. ',
+            type: 'button',
+            style: 'danger',
+            value: 'no'
           }
-        },
-        {
-          name: 'No, I don\'t have a visa yet. ',
-          text: 'No, I don\'t have a visa yet. ',
-          type: 'button',
-          style: 'danger',
-          value: 'No, I don\'t have a visa yet. '
-        }
-      ]
-      },
+        ]
+      }
     ]),
+
+   
+   
   })).then((result) => {
     debug('sendConfirmation: %o', result.data);
   }).catch((err) => {
