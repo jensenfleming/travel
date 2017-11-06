@@ -21,75 +21,45 @@ const sendConfirmation = (ticket) => {
     debug('sendConfirmation error: %o', err);
     console.error(err);
   });
-
+  
  axios.post('https://slack.com/api/chat.postMessage', qs.stringify({
     token: process.env.SLACK_ACCESS_TOKEN,
     channel: ticket.fellow,
     as_user: false,
     username: 'travelbot',
-    text: 'Hi Im TravelBot--Here to help you go through the visa process. I will send you the steps to obtain your visa throughout this week. Please submit the steps in a timely fashion!',
+    text: 'Hi! I\'m TravelBot--here to help you get your visa for traveling :smile:.',
     attachments: JSON.stringify([
       {
-        title: 'Below are the things we have to accompish to get you your visa to travel.',
+        title: 'Before we get started, do you already have a visa?',
         // Get this from the 3rd party helpdesk system
         // title_link: 'http://example.com',
         text: ticket.text,
-        fields: [
-          {
-            value: ':small_blue_diamond: Submit Visa Application',
-          },
-          {
-            value: ':small_blue_diamond: Schedule Interview',
-          },
-          {
-            value: ':small_blue_diamond: Complete Interview Prep',
-          },
-          {
-            value: ':small_blue_diamond: Collect all relevant documents',
-          },
-           {
-            value: ':small_blue_diamond: Attend Interview',
-          },
-          {
-            value: 'Please start by reading this document (http://example.com). When complete click next.',
-          },
-        ],
+        
         fallback: 'Pre-filled because you have actions in your attachment.',
         color: '#30C3DD',
         callback_id: 'decision',
         attachment_type: 'default',
       actions: [
         {
-          name: 'next',
-          text: 'Next!',
+          name: 'Yes! I have one',
+          text: 'Yes! I have one',
           type: 'button',
           style: 'primary',
-          value: 'next'
+          value: 'Yes! I have one',
+          confirm: {
+            title: 'Active visa?',
+            text: 'Please confirm you have an active visa for the country you are traveling to!',
+            ok_text: 'Yes! My visa is active.',
+            dismiss_text: 'Oops, I don\'t have a visa. '
+          }
         },
         {
-          name: 'No, please remind me!',
-          text: 'No, please remind me!',
-          type: 'select',
+          name: 'No, I don\'t have a visa yet. ',
+          text: 'No, I don\'t have a visa yet. ',
+          type: 'button',
           style: 'danger',
-          'options': [
-             {
-                            "text": "In 20 minutes",
-                            "value": "20 mins"
-                        },
-                        {
-                            "text": "In 1 Hour",
-                            "value": "1 hour"
-                        },
-            {
-                            "text": "In 3 Hours",
-                            "value": "3 hours"
-                        },
-            {
-                            "text": "In 24 Hours",
-                            "value": "24 hours"
-                        },
-          ]
-        },
+          value: 'No, I don\'t have a visa yet. '
+        }
       ]
       },
     ]),
